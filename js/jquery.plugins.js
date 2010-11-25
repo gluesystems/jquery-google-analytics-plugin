@@ -4,6 +4,12 @@
  * Copyright (c) 2010 glue Isobar
  * Version: 0.1 (24-NOV-2010)
  * Requires: jQuery v1.4.3 or later
+ *
+ * gaAccountID - string - Google Analytics ID. Change this to the ID given to you during the analytics setup for your site
+ * embedGACode - boolean - Whether to embed the analytics code for you.
+ * trackClassPage - string - Alternative class name to be used for page view tracking
+ * trackClassEvent - string - Alternative class name to be used for event tracking
+ *
  */
 (function($) {
 

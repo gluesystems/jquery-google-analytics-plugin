@@ -1,21 +1,8 @@
-var GlueProject = function() {
+var jQueryPluginTracking = function() {
 	function init() {
-		$(document.body).addClass('js');
-		
-		pngFix();
-
-		$(document).gaTracking({  // calls the init method
-			gaAccountID : 'UA-1352431-7'
+		$(document).gaTracking({
+			gaAccountID : 'UA-1352431-7' // ensure you change this to your Google Analytics site tracking ID
 		});
-
-
-
-	}
-	
-	function pngFix() {
-		if (typeof(jQuery.fn.pngFix) == 'function') {
-			$(document).pngFix();
-		}	
 	}
 
 	return {
@@ -24,5 +11,5 @@ var GlueProject = function() {
 }();
 
 $(document).ready(function(){
-	GlueProject.init();
+	jQueryPluginTracking.init();
 });

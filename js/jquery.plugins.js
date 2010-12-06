@@ -90,7 +90,7 @@
 			switch(type) {
 				case 'page':
 					if (typeof(trackingData.url) != 'undefined') {
-						console.debug('track : page : url=' + trackingData.url);
+						//console.debug('track : page : url=' + trackingData.url);
 						_gaq.push(['_trackPageview', trackingData.url]);
 					}
 					return true;
@@ -99,7 +99,7 @@
 				case 'event':
 					if (typeof(trackingData.url) != 'undefined' &&
 						typeof(trackingData.action) != 'undefined') {
-						console.debug('track : event : url=' + trackingData.url + ' : action=' + trackingData.action);
+						//console.debug('track : event : url=' + trackingData.url + ' : action=' + trackingData.action);
 						_gaq.push(['_trackEvent', trackingData.url, trackingData.action]);
 					}
 					return true;

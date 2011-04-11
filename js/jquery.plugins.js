@@ -10,6 +10,8 @@
  * trackClassPage - string - Alternative class name to be used for page view tracking
  * trackClassEvent - string - Alternative class name to be used for event tracking
  *
+ * Note: You need to view generated source to see the ga.js code being incldued (by the head tag). embedGACode = true
+ *
  */
 (function($) {
 
@@ -55,6 +57,7 @@
 			$('head').append(trackingCode);
 		},
 
+
 		/// attach tracking to appropriate elements click event
 		/// .track = default class for tracking page views
 		/// .track-event = default class for tracking events
@@ -97,6 +100,9 @@
 					break;
 
 				case 'event':
+					/// Note, event data sent as URL / action where URL is used as the GA category
+					/// Shouldn't be any reason why you couldn't do it the other way though,
+					/// Consisitancy of use is probably foremost.
 					if (typeof(trackingData.url) != 'undefined' &&
 						typeof(trackingData.action) != 'undefined') {
 						//console.debug('track : event : url=' + trackingData.url + ' : action=' + trackingData.action);

@@ -10,7 +10,16 @@
  * trackClassPage - string - Alternative class name to be used for page view tracking
  * trackClassEvent - string - Alternative class name to be used for event tracking
  *
- * Note: You need to view generated source to see the ga.js code being incldued (by the head tag). embedGACode = true
+ *
+ * **** BIG NOTE: ****
+ * To test, this MUST be run from a server, not file://
+ * see https://www.google.com/support/forum/p/Google+Analytics/thread?tid=609b8363027f80a4&hl=en
+ *
+ *
+ * Note:
+ * Pass event tracking string via data-ga attribute
+ * View generated source to see the ga.js code being incldued (by the head tag)
+ * when embedGACode = true. This IS working when you see the GA script tag.
  *
  */
 (function($) {
@@ -54,25 +63,23 @@
 				'var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(ga, s);' +
 				' })();' +
 				'</script>';
+
 			$('head').append(trackingCode);
 		},
+
 
 
 		/// attach tracking to appropriate elements click event
 		/// .track = default class for tracking page views
 		/// .track-event = default class for tracking events
-		/// use value (before first space) in the rel element to define .track-event action being carried out
+		/// use custom ga-data attr to define .track-event action being carried out
 		attachTracking: function() {
 			$(settings.trackClassPage).click(function(e) {
 				methods.track('page', { 'url': $(this).attr('href') });
 			});
 
 			$(settings.trackClassEvent).click(function(e) {
-				var endPos = $(this).attr('rel').length;
-				if ($(this).attr('rel').indexOf(' ') > 0) {
-					endPos = $(this).attr('rel').indexOf(' ');
-				}
-				var action = $(this).attr('rel').substring(0, endPos);
+				var action = $(this).attr('data-ga')
 				methods.track('event', {
 					'action': action,
 					'url': $(this).attr('href')
@@ -93,7 +100,7 @@
 			switch(type) {
 				case 'page':
 					if (typeof(trackingData.url) != 'undefined') {
-						//console.debug('track : page : url=' + trackingData.url);
+						//alert('track : page : url=' + trackingData.url);
 						_gaq.push(['_trackPageview', trackingData.url]);
 					}
 					return true;
@@ -105,7 +112,7 @@
 					/// Consisitancy of use is probably foremost.
 					if (typeof(trackingData.url) != 'undefined' &&
 						typeof(trackingData.action) != 'undefined') {
-						//console.debug('track : event : url=' + trackingData.url + ' : action=' + trackingData.action);
+						//alert('track : event : url=' + trackingData.url + ' : action=' + trackingData.action);
 						_gaq.push(['_trackEvent', trackingData.url, trackingData.action]);
 					}
 					return true;
